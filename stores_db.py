@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, Float, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
@@ -51,7 +51,7 @@ class Store(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
-    zipcode = Column(Integer(5), nullable=False)
+    zipcode = Column(Integer, nullable=False)
     manager_id = Column(Integer, ForeignKey('manager.id'))
     manager = relationship(Manager)
 
@@ -65,14 +65,14 @@ class Store(Base):
        }
 
 
-class ShoeItem(Base):
-    __tablename__ = 'shoe_item'
+class Product(Base):
+    __tablename__ = 'product'
 
     name =Column(String, nullable = False)
-    sku = Column(Integer, primary_key = True)
+    id = Column(Integer, primary_key = True)
     description = Column(String)
     units = Column(Integer)
-    price = Column(Real)
+    price = Column(Float)
     size = Column(Integer, nullable = False)
     store_id = Column(Integer,ForeignKey('store.id'))
     store = relationship(Store)
@@ -84,7 +84,7 @@ class ShoeItem(Base):
        """Return object data in easily serializeable format"""
        return {
            'name'           : self.name,
-           'sku'            : self.sku,
+           'id'             : self.id,
            'description'    : self.description,
            'price'          : self.price,
            'units'          : self.units,

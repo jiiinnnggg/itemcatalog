@@ -3,15 +3,11 @@
     <div class="row top-menu">
         <div class="col-md-10"></div>
         <div class="col-md-2 text-right">
-            <a href="{{url_for('showLogin')}}">Click to Log in </a>
+            <a href="#">Click to Log in </a>
         </div>
     </div>
 
-    <div class="row divider blue">
-        <div class="col-md-12"></div>
-    </div>
-
-    <div class="row banner main">
+    <div class="row banner">
         <div class="col-md-1"></div>
         <div class="col-md-11 padding-none">
             <h1>All Stores</h1>
@@ -30,18 +26,8 @@
     {% endwith %}
     </div>
 
-
-
-    <div class="row padding-top padding-bottom">
-        <div class="col-md-1"></div>
-        <div class="col-md-10 padding-none">
-
-        </div>
-        <div class="col-md-1"></div>
-    </div>
-
     {% for store in stores %}
-        <a href = "{{url_for('[[showMenu]]', store_id = store.id)}}">
+        <a href = "{{url_for('showInventory', store_id = store.id)}}">
             <div class="row">
                 <div class="col-md-1"></div>
                     <div class="col-md-10 store-list">
