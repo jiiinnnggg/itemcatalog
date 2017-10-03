@@ -1,0 +1,33 @@
+{% extends "main.html" %}
+{% include "header.html" %}
+
+{% block content %}
+    <div class="container" style="margin-top:20px; font-size: 15px;">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-success" style="text-align: center;">
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    </div>
+
+    <div class="container" style="margin: auto; max-width: 680px;">
+        <div style="padding-top: 25px;">
+            <h4>Delete List</h4>
+        </div>
+
+        <form id="add-biz-to-db" method="post" style="margin: auto; padding-top: 30px;">
+            <div class="form-group">
+                <label>Are you sure you want to delete '{{list.name}}'?</label>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn-primary btn">Delete List</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

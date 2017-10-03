@@ -1,0 +1,38 @@
+{% extends "main.html" %}
+{% include "header.html" %}
+
+{% block content %}
+<div class="container main-page">
+    <div class="container" style="margin-top:20px; font-size: 15px;">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-success" style="text-align: center;">
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    </div>
+
+    {% include "searchbox.html" %}
+
+    <div class="container search-results" style="margin: auto; max-width: 860px;">
+    {% for n in ntuples %}
+        <div class="container row biz-listing col">
+            <div class="biz-image"><a href='{{n.url}}' target="_blank"><img src='{{n.image_url_sm}}'}></a></div>
+
+            <div class="biz-text col-6">
+                <p class="biz-name-link">{{loop.index}}. <a href='{{n.url}}' target="_blank">{{n.name}}</a></p>
+                <p>Address: {{n.address}}</p>
+                <p>Phone: {{n.phone}}</p>
+                <p><img src="/static/img/{{n.rating}}.png" style="margin-right: 10px">{{n.review_count}} reviews | {{n.price}}</p>
+            </div>
+
+        </div>
+        <hr>
+    {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

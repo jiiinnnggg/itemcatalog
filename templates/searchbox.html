@@ -1,0 +1,26 @@
+<div class="container row search-box">
+        <form class="form-inline" method="get" action="/search">
+            <img src="/static/img/Yelp_trademark_RGB.png" alt="yelp logo" height="70">
+            <label class="sr-only">Term</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <div class="input-group-addon">Find</div>
+                <input type="text" class="form-control" name="find_desc" placeholder="(find topic)">
+            </div>
+
+            <label class="sr-only">Location</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <div class="input-group-addon">Near</div>
+                <input type="text" class="form-control" name="find_loc" placeholder="(location or zipcode)">
+            </div>
+
+            <label class="mr-sm-2" for="inlineFormCustomSelect">Return: </label>
+            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="search_limit">
+                <option selected>5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+</div>

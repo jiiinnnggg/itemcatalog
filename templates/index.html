@@ -1,0 +1,30 @@
+{% extends "main.html" %}
+{% include "header.html" %}
+
+{% block content %}
+    <div class="container" style="margin-top:20px; font-size: 15px;">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-success" style="text-align: center;">
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    </div>
+
+    <div class="container row main-page" style="max-width: 860px;">
+        <div class="jumbotron">
+          <h1 class="display-5">Item Catalog Application</h1>
+          <p class="lead">Project Overview</p>
+            <p><em>This application that provides a list of items within a variety of categories as well as provide a user registration and authentication system. Registered users will have the ability to post, edit and delete their own items.</p><br>
+
+            <p>Modern web applications perform a variety of functions and provide amazing features and utilities to their users; but deep down, it’s really all just creating, reading, updating and deleting data. In this project, you’ll combine your knowledge of building dynamic websites with persistent data storage to create a web application that provides a compelling service to your users. (source: Udacity)</em></p>
+          <hr class="my-4">
+          <p>Please <a href="/login">log in using your Google account</a> to access the additional features of this application. This project uses the Yelp API to allow users to create and edit lists of businesses pertaining to their preferred search results. To try out a search without logging in, <a href="/search" target="_blank">click here</a>. To see existing lists created by other users, <a href="/publiclists">click here</a>.</p>
+        </div>
+
+    </div>
+
+{% endblock %}

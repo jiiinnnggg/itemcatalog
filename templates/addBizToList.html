@@ -1,0 +1,91 @@
+{% extends "main.html" %}
+{% include "header.html" %}
+
+{% block content %}
+    <div class="container" style="margin-top:20px; font-size: 15px;">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-success" style="text-align: center;">
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    </div>
+
+    <div class="container" style="margin: auto; max-width: 860px;">
+        <div class="container row">
+            <h5>Add New Business to List "{{list.name}}"</h5>
+            <p style="margin-left: 10px;"><a href="/user/{{user.id}}/list/{{list.id}}">(Go back)</a></p>
+        </div>
+
+        <div class="container" style="margin-top: 15px;">
+            <p>Created by: {{list.user.email}}</p>
+            <p>Description: {{list.description}} | <a href="/user/{{user.id}}/list/{{list.id}}/edit" style="font-size: 15px;">Edit</a></p>
+        </div>
+
+        <div class="container row search-box" style="margin-top: 20px;">
+            <form class="form-inline" method="get" action="/user/{{user.id}}/list/{{list.id}}/addbiz">
+                <img src="/static/img/Yelp_trademark_RGB.png" alt="yelp logo" height="70">
+                <label class="sr-only">Term</label>
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon">Find</div>
+                    <input type="text" class="form-control" name="find_desc" placeholder="(find topic)">
+                </div>
+
+                <label class="sr-only">Location</label>
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon">Near</div>
+                    <input type="text" class="form-control" name="find_loc" placeholder="(location or zipcode)">
+                </div>
+
+                <label class="mr-sm-2" for="inlineFormCustomSelect">Return: </label>
+                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="search_limit">
+                    <option selected>5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+
+        <hr>
+
+        <div class="container search-results">
+        {% for n in ntuples %}
+            <div class="container row biz-listing col">
+                <div class="biz-image"><a href='{{n.url}}' target="_blank"><img src='{{n.image_url_sm}}'}></a></div>
+
+                <div class="biz-text col-6">
+                    <p class="biz-name-link">{{loop.index}}. <a href='{{n.url}}' target="_blank">{{n.name}}</a></p>
+                    <p>Address: {{n.address}}</p>
+                    <p>Phone: {{n.phone}}</p>
+                    <p><img src="/static/img/{{n.rating}}.png" style="margin-right: 10px">{{n.review_count}} reviews | {{n.price}}</p>
+                </div>
+
+                <div class="add_to_db col">
+                    <form id="add-biz-to-db" method="post" target="_blank">
+                        <input type="hidden" value="{{n.name}}" name="name">
+                        <input type="hidden" value="{{n.id_name}}" name="id_name">
+                        <input type="hidden" value="{{n.address}}" name="address">
+                        <input type="hidden" value="{{n.phone}}" name="phone">
+                        <input type="hidden" value="{{n.price}}" name="price">
+                        <input type="hidden" value="{{n.rating}}" name="rating">
+                        <input type="hidden" value="{{n.review_count}}" name="review_count">
+                        <input type="hidden" value="{{n.url}}" name="url">
+                        <input type="hidden" value="{{n.image_url_sm}}" name="image_url">
+
+                        <button type="submit" class="btn btn-outline-primary">Add to List</button>
+                    </form>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock %}
