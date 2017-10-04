@@ -46,7 +46,7 @@ def showLogin():
     return render_template('login.html', STATE=state)
 
 
-# GOOGLE CONNECT
+# GOOGLE CONNECT / from OAuth2.0 project
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
     # Validate state token
