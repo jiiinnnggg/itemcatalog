@@ -20,7 +20,7 @@ To get everything up and running, we'll need to install VirtualBox and Vagrant. 
 
 ![vagrant ssh success](https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58fa90dd_screen-shot-2017-04-21-at-16.06.30/screen-shot-2017-04-21-at-16.06.30.png)(*source: Udacity tutorial*)
 
-**II. Adding your API credentials** 
+**II. Adding your API credentials**
 
 This application uses 2 json files to store client secrets for accessing the Google API for logins and the Yelp API for searches.
 
@@ -44,8 +44,11 @@ Additional instructions from Yelp [here](https://www.yelp.com/developers/documen
 1. Clone this repo into the directory where your vagrant vm has set up.
 2. Log in to the vagrant VM, go to the catalog directory, create your client secret json files, and run:
 
+
 >
     python database_setup.py
+(first time only)
+
 >
     python catalog.py
 
