@@ -63,7 +63,8 @@ def term_loc_search(bearer_token, term, location, search_limit):
         'location': location.replace(' ', '+'),
         'limit': search_limit
     }
-    return yelp_request(API_HOST, SEARCH_PATH, bearer_token, url_params=url_params)
+    return yelp_request(API_HOST, SEARCH_PATH,
+                        bearer_token, url_params=url_params)
 
 
 # search by yelp business id
@@ -83,12 +84,11 @@ def query_api(term, location, search_limit=None):
         print(u'No businesses for {0} in {1} found.'.format(term, location))
         return
 
-    print(u'{0} businesses found, querying business info ' \
-        'for the top results...'.format(
-            len(businesses)))
+    print(u"""{0} businesses found, querying business info
+          for the top results...""".format(len(businesses)))
 
     businesses_info = {}
-    for x in range(0,len(businesses)):
+    for x in range(0, len(businesses)):
         biz_address = businesses[x]['location']['display_address']
         biz_address_str = ", ".join(biz_address)
         if 'price' in businesses[x]:
@@ -105,8 +105,10 @@ def query_api(term, location, search_limit=None):
             "review_count": businesses[x]['review_count'],
             "price": pr,
             "image_url": businesses[x]['image_url'],
-            "image_url_sm": businesses[x]['image_url'].replace("o.jpg","120s.jpg"),
-            "image_url_med": businesses[x]['image_url'].replace("o.jpg","300s.jpg"),
+            "image_url_sm":
+                businesses[x]['image_url'].replace("o.jpg", "120s.jpg"),
+            "image_url_med":
+                businesses[x]['image_url'].replace("o.jpg", "300s.jpg"),
             "address": biz_address_str
             }
 
@@ -117,7 +119,7 @@ def query_api(term, location, search_limit=None):
 def render_ntuples(businesses_info):
     api_result = businesses_info
     businesses = {}
-    for i in range(0,len(api_result)):
+    for i in range(0, len(api_result)):
         biz = api_result.items()[i][1]
         bkey = biz['id_name']
         businesses[bkey] = namedtuple("Business", biz.keys())(*biz.values())
