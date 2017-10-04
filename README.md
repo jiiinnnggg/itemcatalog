@@ -27,14 +27,14 @@ This application uses 2 json files to store client secrets for accessing the Goo
 ###For Google API:
 In the top directory, you will need to create a file: "google\_client\_secrets.json":
 >
-    {"web":{"client\_id":"(your info here)","project\_id":"(your info here)","auth\_uri":"https://accounts.google.com/o/oauth2/auth","token\_uri":"https://accounts.google.com/o/oauth2/token","auth\_provider\_x509\_cert\_url":"https://www.googleapis.com/oauth2/v1/certs","client\_secret":”(your info here)","redirect\_uris":["(your info here)"],"javascript\_origins":["(your info here)"]}}
+    {"web":{"client_id":"(your info here)","project_id":"(your info here)","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://accounts.google.com/o/oauth2/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":”(your info here)","redirect_uris":["(your info here)"],"javascript_origins":["(your info here)"]}}
 
 Additional instructions from Google [here](https://developers.google.com/identity/protocols/OAuth2WebServer). You will need to create a new project on the [Google Cloud Platform console](https://console.cloud.google.com), then in the "API & services" menu, go to "Credentials", then "OAuth 2.0 client IDs". There, under "Authorized JavaScript origins", add "http://localhost:5000", and under "Authorized redirect URIs", add "http://localhost:5000/oauth2callback", and save.
 
 ###For Yelp API:
 In the top directory, you will need to create a file: "yelp\_client\_secrets.json":
 >
-    {"web":{"client\_id":"(your info here)","client_secret":"(your info here)"}}
+    {"web":{"client_id":"(your info here)","client_secret":"(your info here)"}}
 
 Additional instructions from Yelp [here](https://www.yelp.com/developers/documentation/v3). You will need to create an app with Yelp to receive a Client ID + Client Secret codes to plug into the "yelp\_client\_secrets.json" file.
 
