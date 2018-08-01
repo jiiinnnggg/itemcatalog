@@ -24,7 +24,7 @@ app = Flask(__name__)
 
 
 # Connect to Database and create database session
-engine = create_engine('sqlite:///itemcatalog.db')
+engine = create_engine('sqlite:///itemcatalog.db', connect_args={'check_same_thread':False})
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
