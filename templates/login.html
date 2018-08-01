@@ -18,13 +18,13 @@
         </div>
 
         <!-- GOOGLE PLUS SIGN IN BUTTON-->
-        <div class="login-box" style="max-width: 250px; padding: 20px; box-shadow: 0 8px 8px -6px #BDBDBD; border-style: solid; border-color: #E6E6E6; border-width: 1.5px; margin: auto;">
+        <div class="login-box" style="max-width: 300px; padding: 20px; box-shadow: 0 8px 8px -6px #BDBDBD; border-style: solid; border-color: #E6E6E6; border-width: 1.5px; margin: auto;">
             <div>
                 <p style="text-align: center; margin-bottom: 20px">Log in with Google+:</p>
                 <div style="text-align: center" id="signInButton">
                   <span class="g-signin"
                     data-scope="openid email"
-                    data-clientid="363391978892-oaok87n98pc67aql937ilk36sdtfgci9.apps.googleusercontent.com"
+                    data-clientid="343099689600-2o2ko9ql0qs1q4r9kb0oen8nfkicb99j.apps.googleusercontent.com"
                     data-redirecturi="postmessage"
                     data-accesstype="offline"
                     data-cookiepolicy="single_host_origin"
@@ -41,6 +41,7 @@
         <script>
         function signInCallback(authResult) {
             if (authResult['code']) {
+
                 // Hide the sign-in button now that the user is authorized
                 $('#signinButton').attr('style', 'display: none');
                 // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
@@ -53,21 +54,19 @@
                     success: function(result) {
                         // Handle or verify the server response if necessary.
                         if (result) {
-                            $('#result').html('Login Successful!</br>'+result+
-                                '</br> Redirecting...')
+                            $('#result').html('Login Successful!</br>'+result+'</br> Redirecting...');
                             setTimeout(function() {
-                                window.location.href = "/userhome";}, 3000);
-                            }
-                        else if (authResult['error']) {
+                                window.location.href = "/userhome";
+                            }, 3000);
+                        } else if (authResult['error']) {
                             console.log('There was an error: ' + authResult['error']);
-                            }
-                        else {
+                        } else {
                             $('#result').html('Failed to make a server-side call. Check your configuration and console.');
-                            }
                         }
-                    });
-                }
+                    }
+                });
             }
+        }
         </script>
         <!-- END GOOGLE SIGN IN -->
 
