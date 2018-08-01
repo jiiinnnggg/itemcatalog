@@ -25,6 +25,8 @@ To get everything up and running, we'll need to install VirtualBox and Vagrant. 
 This application uses 2 json files to store client secrets for accessing the Google API for logins and the Yelp API for searches.
 
 ###For Google API:
+(Note: for the login to work correct, client must enable "Accept third-party cookies and site data" in their browser.)
+
 In the top directory, you will need to create a file: "google\_client\_secrets.json":
 >
     {"web":{"client_id":"(your info here)","project_id":"(your info here)","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://accounts.google.com/o/oauth2/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":”(your info here)","redirect_uris":["(your info here)"],"javascript_origins":["(your info here)"]}}
