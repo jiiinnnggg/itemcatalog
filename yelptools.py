@@ -17,9 +17,7 @@ except ImportError:
 
 
 # yelp API info
-CLIENT_ID = json.loads(
-    open('yelp_client_secrets.json', 'r').read())['web']['client_id']
-CLIENT_SECRET = json.loads(
+API_KEY = json.loads(
     open('yelp_client_secrets.json', 'r').read())['web']['client_secret']
 
 # Yelp API constants, you shouldn't have to change these.
@@ -28,28 +26,12 @@ SEARCH_PATH = '/v3/businesses/search'
 BUSINESS_PATH = '/v3/businesses/'  # Business ID will come after slash.
 
 
-# returns a token from Yelp using client id and client secret
-def get_yelpToken():
-    url = 'https://api.yelp.com/oauth2/token'
-    headers = {
-        'content-type': 'application/x-www-form-urlencoded',
-        }
-    data = urlencode({
-        'client_id': CLIENT_ID,
-        'client_secret': CLIENT_SECRET,
-        'grant_type': 'client_credentials',
-        })
-    response = requests.request('POST', url, data=data, headers=headers)
-    yelp_token = response.json()['access_token']
-    return yelp_token
-
-
 # generic request function for yelp, pass in generic params
-def yelp_request(host, path, yelp_token, url_params=None):
+def yelp_request(host, path, api_key, url_params=None):
     url_params = url_params or {}
     url = '{0}{1}'.format(host, quote(path.encode('utf8')))
     headers = {
-        'Authorization': 'Bearer %s' % yelp_token,
+        'Authorization': 'Bearer %s' % api_key,
         }
     print(u'Querying {0} ...'.format(url))
     response = requests.request('GET', url, headers=headers, params=url_params)
@@ -57,27 +39,26 @@ def yelp_request(host, path, yelp_token, url_params=None):
 
 
 # search function for yelp based on term and location
-def term_loc_search(bearer_token, term, location, search_limit):
+def term_loc_search(api_key, term, location, search_limit):
     url_params = {
         'term': term.replace(' ', '+'),
         'location': location.replace(' ', '+'),
         'limit': search_limit
     }
     return yelp_request(API_HOST, SEARCH_PATH,
-                        bearer_token, url_params=url_params)
+                        api_key, url_params=url_params)
 
 
 # search by yelp business id
-def get_business(bearer_token, business_id):
+def get_business(api_key, business_id):
     business_path = BUSINESS_PATH + business_id
-    return yelp_request(API_HOST, business_path, bearer_token)
+    return yelp_request(API_HOST, business_path, api_key)
 
 
 # put it all together
 def query_api(term, location, search_limit=None):
     search_limit = search_limit or 3
-    yelp_token = get_yelpToken()
-    response = term_loc_search(yelp_token, term, location, search_limit)
+    response = term_loc_search(API_KEY, term, location, search_limit)
     businesses = response.get('businesses')
 
     if not businesses:
