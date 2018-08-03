@@ -364,12 +364,15 @@ def addBizToList(user_id, list_id):
     if 'username' not in login_session:
         flash("Please login to create or modify a user list.")
         return redirect(url_for('showHome'))
+
     user = session.query(User).filter_by(id=user_id).one()
     userlist = session.query(BizList).filter_by(id=list_id).one()
+
     if userlist.user_id != login_session['user_id']:
         flash("You are only allowed to modify or delete your own lists.")
         return redirect(url_for('showUserList',
                                 user_id=user.id, list_id=userlist.id))
+        
     if request.method == 'POST':
         newBizname = request.form['id_name']
         match = session.query(Business).filter_by(id_name=newBizname).all()

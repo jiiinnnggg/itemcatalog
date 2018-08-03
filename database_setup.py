@@ -28,8 +28,9 @@ class Business(Base):
     __tablename__ = 'business'
 
     name = Column(String(200), nullable=False)
-    id = Column(Integer, primary_key=True)
-    id_name = Column(String(100))
+    #id = Column(Integer, primary_key=True) #old code, working, a lot depends on this to render the list object correctly
+    #id_name = Column(String(100)) #old code, working, a lot depends on this to render the list object correctly
+    id_name = Column(String(100), primary_key=True) #new code, to work w unique requirement per postgresql
     url = Column(String(250))
     address = Column(String(250))
     phone = Column(String(30))
@@ -82,9 +83,13 @@ class BizList(Base):
 class ListObject(Base):
     __tablename__ = 'list_object'
 
-    name = Column(String(100), ForeignKey('business.id_name'))
-    business = relationship(Business)
     id = Column(Integer, primary_key=True)
+
+    name = Column(String(100), ForeignKey('business.id_name')) #old code, working, a lot depends on this to render the list object correctly
+    #name = Column(String(100))#, business.id_name) 
+    #biz_id = Column(Integer, ForeignKey('business.id')) #new code, to work w unique requirement per postgresql
+    business = relationship(Business)
+
     list_id = Column(Integer, ForeignKey('biz_list.id'))
     biz_list = relationship(BizList)
 
@@ -92,7 +97,8 @@ class ListObject(Base):
     def serialize(self):
         return {
             'list_obj_id': self.id,
-            'ref_biz': self.name,
+            'ref_biz_name': self.name,
+            #'ref_biz_id': self.biz_id,
             'ref_bizname': self.business.name,
             'ref_list': self.biz_list.name,
             'ref_username': self.biz_list.user.name,
