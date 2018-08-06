@@ -24,15 +24,14 @@ app = Flask(__name__)
 
 
 # Connect to Database and create database session
-engine = create_engine('postgresql://catalog:catalog@localhost/catalog', connect_args={'check_same_thread':False})
+engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
 # login as a google user + oauth2
-CLIENT_ID = json.loads(
-    open('/var/www/itemcatalog/itemcatalog/google_client_secrets.json', 'r').read())['web']['client_id']
+CLIENT_ID = json.loads(open('/var/www/itemcatalog/itemcatalog/google_client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Item Catalog Application"
 
 
@@ -60,8 +59,7 @@ def gconnect():
 
     try:
         # Upgrade the authorization code into a credentials object
-        oauth_flow = flow_from_clientsecrets(
-                        'google_client_secrets.json', scope='')
+        oauth_flow = flow_from_clientsecrets('/var/www/itemcatalog/itemcatalog/google_client_secrets.json', scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
         print(credentials)
