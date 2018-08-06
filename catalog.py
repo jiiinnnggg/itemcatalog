@@ -24,7 +24,7 @@ app = Flask(__name__)
 
 
 # Connect to Database and create database session
-engine = create_engine('sqlite:///itemcatalog.db', connect_args={'check_same_thread':False})
+engine = create_engine('postgresql://catalog:catalog@localhost/catalog', connect_args={'check_same_thread':False})
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
@@ -511,6 +511,4 @@ def showListObjectsJSON(list_id):
 
 
 if __name__ == '__main__':
-    app.secret_key = 'open_sesame'
-    app.debug = True
-    app.run(host='0.0.0.0', port=5000)
+    app.run()
