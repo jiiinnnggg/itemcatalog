@@ -18,7 +18,7 @@ except ImportError:
 
 # yelp API info
 API_KEY = json.loads(
-    open('yelp_client_secrets.json', 'r').read())['web']['client_secret']
+    open('/var/www/itemcatalog/itemcatalog/yelp_client_secrets.json', 'r').read())['web']['client_secret']
 
 # Yelp API constants, you shouldn't have to change these.
 API_HOST = 'https://api.yelp.com'
