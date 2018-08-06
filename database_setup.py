@@ -7,7 +7,7 @@ Base = declarative_base()
 
 
 class User(Base):
-    __tablename__ = 'user'
+    __tablename__ = 'users'
 
     name = Column(String(250), nullable=False)
     email = Column(String(250), nullable=False)
@@ -41,7 +41,7 @@ class Business(Base):
     image_url_sm = Column(String(250))
     image_url_med = Column(String(250))
     comment = Column(String)
-    user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey('users.id'))
     user = relationship(User)
 
     @property
@@ -65,7 +65,7 @@ class BizList(Base):
     name = Column(String(200), nullable=False)
     id = Column(Integer, primary_key=True)
     description = Column(String)
-    user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey('users.id'))
     user = relationship(User)
 
     @property
