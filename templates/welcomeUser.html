@@ -26,9 +26,9 @@
         </div>
         {% endfor %}
 
-        <button class="btn btn-block btn-outline-primary">
-            <a href="/user/{{session.user_id}}/list/new" style="text-decoration: none; display: block;">Create a new list</a>
-        </button>
+        <div class="container">
+            <a class="btn btn-block" href="/user/{{session.user_id}}/list/new" style="text-decoration: none; display: block;">Create a new list</a>
+        </div>
 
         <a href="/search">Try a Yelp Search</a>
     </div>
